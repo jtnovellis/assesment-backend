@@ -5,19 +5,11 @@ const {
   updateFav,
   deleteFav,
 } = require('./fav.service');
-const User = require('../user/user.model');
 
 const create = async (req, res) => {
   const favData = req.body;
-  const userId = req.user;
   try {
-    const user = await User.findById(userId);
-    if (!user) {
-      throw new Error('The user does not exist');
-    }
-    const fav = await createFav(favData, userId);
-    user.favs.push(fav);
-    await user.save({ validateBeforeSave: false });
+    const fav = await createFav(favData);
     return res.status(201).json({ message: 'fav created', data: fav });
   } catch (err) {
     return res.status(400).json({ message: 'fav not created', data: err });

@@ -8,13 +8,9 @@ const favSchema = new Schema(
       unique: true,
     },
     list: {
-      type: Array,
-      required: true,
-    },
-    user: {
       type: Schema.Types.ObjectId,
-      ref: 'User',
-      required: true,
+      ref: 'List',
+      required: false,
     },
   },
   {
