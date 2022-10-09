@@ -2,15 +2,21 @@ const { Schema, model } = require('mongoose');
 
 const favSchema = new Schema(
   {
-    name: {
+    title: {
       type: String,
-      required: true,
-      unique: true,
+      required: [true, 'This field is required'],
+    },
+    description: {
+      type: String,
+    },
+    link: {
+      type: String,
+      required: [true, 'This field is required'],
     },
     list: {
       type: Schema.Types.ObjectId,
       ref: 'List',
-      required: false,
+      required: true,
     },
   },
   {
