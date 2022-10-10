@@ -1,7 +1,7 @@
 const List = require('./list.model');
 
-const createList = (list, userId) => {
-  return List.create({ ...list, user: userId });
+const createList = (list) => {
+  return List.create(list);
 };
 
 const getAllList = () => {

@@ -13,7 +13,7 @@ const listSchema = new Schema(
     },
     user: {
       type: Schema.Types.ObjectId,
-      required: true,
+      required: false,
     },
   },
   {
