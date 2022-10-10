@@ -13,7 +13,7 @@ const favSchema = new Schema(
       type: String,
       required: [true, 'This field is required'],
     },
-    list: {
+    listname: {
       type: Schema.Types.ObjectId,
       ref: 'List',
       required: true,

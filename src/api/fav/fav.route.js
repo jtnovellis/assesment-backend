@@ -4,7 +4,7 @@ const { list, update, create, destroy, show } = require('./fav.controller');
 
 const router = express.Router();
 
-router.post('/', create);
+router.post('/new/:listId', create);
 router.get('/', list);
 router.get('/:favId', show);
 router.put('/:favId', update);
