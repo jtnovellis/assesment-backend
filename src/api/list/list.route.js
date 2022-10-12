@@ -1,11 +1,13 @@
 const express = require('express');
-const { show, update, destroy, list, create } = require('./list.controller');
+const { create, allList, show, update, destroy } = require('./list.controller');
+const { authenticate } = require('../middlewares/auth');
+
 const router = express.Router();
 
-router.get('/', list);
-router.post('/', create);
-router.get('/:listId', show);
-router.put('/:listId', update);
-router.delete('/:listId', destroy);
+router.post('/', authenticate, create);
+router.get('/', authenticate, allList);
+router.get('/:listId', authenticate, show);
+router.put('/:listId', authenticate, update);
+router.delete('/:listId', authenticate, destroy);
 
 module.exports = router;

@@ -1,15 +1,23 @@
 const {
-  deleteList,
   createList,
-  updateList,
   getAllList,
-  getListById,
+  getSingleList,
+  updateList,
+  deleteList,
 } = require('./list.service');
+const User = require('../user/user.model');
 
 const create = async (req, res) => {
-  const listData = req.body;
+  const data = req.body;
+  const id = req.user;
   try {
-    const list = await createList(listData);
+    const user = await User.findById(id);
+    if (!user) {
+      throw new Error('The user does not exist');
+    }
+    const list = await createList(data, id);
+    user.lists.push(list);
+    await user.save({ validateBeforeSave: false });
     return res.status(201).json({ message: 'List created', data: list });
   } catch (err) {
     return res
@@ -18,22 +26,28 @@ const create = async (req, res) => {
   }
 };
 
-const list = async (_, res) => {
+const allList = async (req, res) => {
+  const id = req.user;
   try {
     const lists = await getAllList();
-    return res.status(200).json({ message: 'Lists found', data: lists });
+    const listsToSend = lists.filter((list) => list.user.toString() === id);
+    return res.status(200).json({ message: 'Lists found', data: listsToSend });
   } catch (err) {
-    return res.status(400).json({ message: 'Lists not found', error: err });
+    return res
+      .status(400)
+      .json({ message: 'Lists could not be found', error: err });
   }
 };
 
 const show = async (req, res) => {
   const { listId } = req.params;
   try {
-    const list = await getListById(listId);
+    const list = await getSingleList(listId);
     return res.status(200).json({ message: 'List found', data: list });
   } catch (err) {
-    return res.status(400).json({ message: 'List not found', error: err });
+    return res
+      .status(400)
+      .json({ message: 'List could not be found', error: err });
   }
 };
 
@@ -44,18 +58,20 @@ const update = async (req, res) => {
     const list = await updateList(listId, listData);
     return res.status(200).json({ message: 'List updated', data: list });
   } catch (err) {
-    return res.status(400).json({ message: 'List not updated', error: err });
+    return res
+      .status(400)
+      .json({ message: 'List could not be updated', error: err });
   }
 };
 
 const destroy = async (req, res) => {
   const { listId } = req.params;
   try {
-    const list = await deleteList(listId);
-    return res.status(200).json({ message: 'List deleted', data: list });
+    const listDeleted = await deleteList(listId);
+    return res.status(200).json({ message: 'List deleted', data: listDeleted });
   } catch (err) {
-    return res.status(400).json({ message: 'List not deleted', error: err });
+    return res.status(400).json({ message: 'List not deleted', data: err });
   }
 };
 
-module.exports = { list, create, show, update, destroy };
+module.exports = { create, allList, show, update, destroy };

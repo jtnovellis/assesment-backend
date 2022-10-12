@@ -5,7 +5,6 @@ const listSchema = new Schema(
     name: {
       type: String,
       required: true,
-      unique: true,
     },
     favs: {
       type: [{ type: Schema.Types.ObjectId, ref: 'Fav' }],
@@ -13,7 +12,7 @@ const listSchema = new Schema(
     },
     user: {
       type: Schema.Types.ObjectId,
-      required: false,
+      required: true,
     },
   },
   {

@@ -1,19 +1,19 @@
 const List = require('./list.model');
 
-const createList = (list) => {
-  return List.create(list);
+const createList = async (data, id) => {
+  return List.create({ ...data, user: id });
 };
 
 const getAllList = () => {
-  return List.find({});
+  return List.find();
 };
 
-const getListById = (id) => {
+const getSingleList = (id) => {
   return List.findById(id);
 };
 
-const updateList = (id, list) => {
-  return List.findByIdAndUpdate(id, list, { new: true });
+const updateList = (id, data) => {
+  return List.findByIdAndUpdate(id, data, { new: true });
 };
 
 const deleteList = (id) => {
@@ -23,7 +23,7 @@ const deleteList = (id) => {
 module.exports = {
   createList,
   getAllList,
-  getListById,
+  getSingleList,
   updateList,
   deleteList,
 };

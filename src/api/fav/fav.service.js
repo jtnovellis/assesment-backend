@@ -1,15 +1,15 @@
 const Fav = require('./fav.model');
 
-const createFav = (fav) => {
-  return Fav.create(fav);
+const createFav = (fav, id) => {
+  return Fav.create({ ...fav, list: id });
 };
 
 const getAllfavs = () => {
-  return Fav.find({}).populate('list');
+  return Fav.find();
 };
 
 const getFavById = (id) => {
-  return Fav.findById(id).populate('list');
+  return Fav.findById(id);
 };
 
 const updateFav = (id, fav) => {

@@ -8,10 +8,11 @@ const favSchema = new Schema(
     },
     description: {
       type: String,
+      required: false,
     },
     link: {
       type: String,
-      required: [true, 'This field is required'],
+      required: false,
     },
     list: {
       type: Schema.Types.ObjectId,

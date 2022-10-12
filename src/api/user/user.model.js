@@ -35,8 +35,9 @@ const userSchema = new Schema(
       minLength: [8, 'Password too short'],
       match: [passwordRegex, 'Special character, number and capital letter'],
     },
-    favs: {
-      type: [{ type: Schema.Types.ObjectId, ref: 'Fav' }],
+    lists: {
+      type: [{ type: Schema.Types.ObjectId, ref: 'List' }],
+      required: false,
     },
   },
   {
