@@ -1,7 +1,7 @@
 const Fav = require('./fav.model');
 
-const createFav = (fav) => {
-  return Fav.create(fav);
+const createFav = (fav, id) => {
+  return Fav.create({ ...fav, list: id });
 };
 
 const getAllfavs = () => {

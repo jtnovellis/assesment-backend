@@ -4,9 +4,9 @@ const { authenticate } = require('../middlewares/auth');
 
 const router = express.Router();
 
-router.post('/', authenticate, create);
-router.get('/', authenticate, list);
-router.get('/:favId', authenticate, show);
+router.post('/:listId', authenticate, create);
+router.get('/:listId', authenticate, list);
+router.get('/only/:favId', authenticate, show);
 router.put('/:favId', authenticate, update);
 router.delete('/:favId', authenticate, destroy);
 
