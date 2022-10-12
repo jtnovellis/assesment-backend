@@ -8,12 +8,13 @@ const favSchema = new Schema(
     },
     description: {
       type: String,
+      required: false,
     },
     link: {
       type: String,
-      required: [true, 'This field is required'],
+      required: false,
     },
-    listname: {
+    list: {
       type: Schema.Types.ObjectId,
       ref: 'List',
       required: true,

@@ -1,4 +1,5 @@
-const List = require('../list/list.model');
+const User = require('../user/user.model');
+const Fav = require('./fav.model');
 const {
   createFav,
   getAllfavs,
@@ -10,19 +11,18 @@ const {
 const create = async (req, res) => {
   try {
     const favData = req.body;
-    const { listId } = req.params;
-    const list = List.findById(listId);
-    console.log(list);
-    if (!list) {
-      throw new Error('List does not exist');
+    const id = req.user;
+    const user = await User.findById(id);
+    if (!user) {
+      throw new Error('User does not exist');
     }
     const newFav = {
       ...favData,
-      listname: listId,
+      user: id,
     };
-    const fav = await createFav(newFav);
-    list.favs.push(fav);
-    await list.save({ validateBeforeSave: false });
+    const fav = await Fav.create(newFav);
+    user.favs.push(fav);
+    await user.save({ validateBeforeSave: false });
     return res.status(201).json({ message: 'fav created', data: fav });
   } catch (err) {
     return res.status(400).json({ message: 'fav not created', data: err });
