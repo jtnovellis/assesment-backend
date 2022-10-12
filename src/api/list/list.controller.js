@@ -30,7 +30,7 @@ const allList = async (req, res) => {
   const id = req.user;
   try {
     const lists = await getAllList();
-    const listsToSend = lists.filter((list) => list.user === id);
+    const listsToSend = lists.filter((list) => list.user.toString() === id);
     return res.status(200).json({ message: 'Lists found', data: listsToSend });
   } catch (err) {
     return res
@@ -64,10 +64,10 @@ const update = async (req, res) => {
   }
 };
 
-const destroy = (req, res) => {
+const destroy = async (req, res) => {
   const { listId } = req.params;
   try {
-    const listDeleted = deleteList(listId);
+    const listDeleted = await deleteList(listId);
     return res.status(200).json({ message: 'List deleted', data: listDeleted });
   } catch (err) {
     return res.status(400).json({ message: 'List not deleted', data: err });

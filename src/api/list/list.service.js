@@ -1,15 +1,11 @@
 const List = require('./list.model');
 
 const createList = async (data, id) => {
-  const existingList = await List.findOne({ name: data.name });
-  if (!existingList) {
-    throw new Error('This list is alreay exist');
-  }
   return List.create({ ...data, user: id });
 };
 
 const getAllList = () => {
-  return List.find({});
+  return List.find();
 };
 
 const getSingleList = (id) => {

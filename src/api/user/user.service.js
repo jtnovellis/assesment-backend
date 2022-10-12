@@ -5,7 +5,7 @@ const signUp = (user, encPassword) => {
 };
 
 const signIn = (email) => {
-  return User.findOne({ email }).populate('favs');
+  return User.findOne({ email });
 };
 
 module.exports = { signUp, signIn };
