@@ -4,23 +4,31 @@ let connection;
 
 async function connect() {
   if (connection) return;
-  const mongoUri =
-    'mongodb+srv://jtnovellis:TWRPQ6qx8YB4buc7@cluster0.zoo63qq.mongodb.net/favs?retryWrites=true&w=majority';
+
+  // const mongoUri = process.env.MONGODB_URI;
+
   connection = mongoose.connection;
+
   connection.once('open', () => {
     console.log('Connection with mongo OK');
   });
+
   connection.on('disconnected', () => {
     console.log('Disconnected successfull');
   });
+
   connection.on('error', (error) => {
     console.log('Something went wrong!', error);
   });
-  await mongoose.connect(mongoUri);
+
+  await mongoose.connect(
+    'mongodb+srv://jtnovellis:TWRPQ6qx8YB4buc7@cluster0.zoo63qq.mongodb.net/favs?retryWrites=true&w=majority'
+  );
 }
 
 async function disconnected() {
   if (!connection) return;
+
   await mongoose.disconnect();
 }
 
