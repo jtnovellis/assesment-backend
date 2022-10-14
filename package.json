@@ -4,10 +4,10 @@
   "description": "This is the assesment Backend from Make It Real",
   "main": "src/index.js",
   "scripts": {
-    "test": "jest --detectOpenHandles",
+    "test": "NODE_ENV=test jest --verbose",
     "test:coverage": "test -- --coverage",
-    "dev": "nodemon src/index.js",
-    "start": "src/index.js"
+    "dev": "NODE_ENV=development nodemon src/index.js",
+    "start": "NODE_ENV=production src/index.js"
   },
   "author": "jtnovellis",
   "license": "ISC",

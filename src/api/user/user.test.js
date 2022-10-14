@@ -15,7 +15,7 @@ describe('User', () => {
   });
 
   it('Should resopond with status code 201', async () => {
-    const user = { email: 'jairo.test@test.com', password: 'Fg3432634?s5' };
+    const user = { email: 'jairo.dfest@test.com', password: 'Fg343234534?s5' };
     const res = await request(app).post('/api/auth/local/signup').send(user);
     expect(res.statusCode).toBe(201);
     expect(res.body.data).toHaveProperty('token');
