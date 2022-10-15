@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt');
 const signUpHandle = async (req, res) => {
   const userData = req.body;
   try {
-    const encPassword = await bcrypt.hash(userData.password, 8);
+    const encPassword = await bcrypt.hash(userData.password, 10);
     const user = await signUp(userData, encPassword);
     const token = jwt.sign({ id: user._id }, process.env.SECRET_KEY, {
       expiresIn: '1d',
