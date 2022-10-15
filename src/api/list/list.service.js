@@ -4,8 +4,8 @@ const createList = async (data, id) => {
   return List.create({ ...data, user: id });
 };
 
-const getAllList = () => {
-  return List.find();
+const getAllList = (userId) => {
+  return List.find({ user: userId });
 };
 
 const getSingleList = (id) => {

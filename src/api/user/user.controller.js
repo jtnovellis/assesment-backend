@@ -12,7 +12,7 @@ const signUpHandle = async (req, res) => {
     });
     return res
       .status(201)
-      .json({ message: 'User created successfully', data: { user, token } });
+      .json({ message: 'User created successfully', data: token });
   } catch (err) {
     return res
       .status(400)
@@ -34,9 +34,7 @@ const signInHandle = async (req, res) => {
     const token = jwt.sign({ id: user._id }, process.env.SECRET_KEY, {
       expiresIn: '1d',
     });
-    return res
-      .status(201)
-      .json({ message: 'Login successfully', data: { email, token } });
+    return res.status(201).json({ message: 'Login successfully', data: token });
   } catch (err) {
     return res
       .status(400)

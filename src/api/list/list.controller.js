@@ -29,9 +29,8 @@ const create = async (req, res) => {
 const allList = async (req, res) => {
   const id = req.user;
   try {
-    const lists = await getAllList();
-    const listsToSend = lists.filter((list) => list.user.toString() === id);
-    return res.status(200).json({ message: 'Lists found', data: listsToSend });
+    const lists = await getAllList(id);
+    return res.status(200).json({ message: 'Lists found', data: lists });
   } catch (err) {
     return res
       .status(400)
