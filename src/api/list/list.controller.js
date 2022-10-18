@@ -15,6 +15,7 @@ const create = async (req, res) => {
     if (!user) {
       throw new Error('The user does not exist');
     }
+    console.log(user);
     const list = await createList(data, id);
     user.lists.push(list);
     await user.save({ validateBeforeSave: false });

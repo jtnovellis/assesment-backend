@@ -7,8 +7,8 @@ const signUpHandle = async (req, res) => {
   try {
     const encPassword = await bcrypt.hash(userData.password, 10);
     const user = await signUp(userData, encPassword);
-    const token = jwt.sign({ id: user._id }, process.env.SECRET_KEY, {
-      expiresIn: '1d',
+    const token = jwt.sign({ id: user._id }, 'AjddDDF34757edfg', {
+      expiresIn: 60000,
     });
     return res
       .status(201)
@@ -31,10 +31,10 @@ const signInHandle = async (req, res) => {
     if (!isValid) {
       throw new Error('Some of your credentials are invalid, passw');
     }
-    const token = jwt.sign({ id: user._id }, process.env.SECRET_KEY, {
-      expiresIn: '1d',
+    const token = jwt.sign({ id: user._id }, 'AjddDDF34757edfg', {
+      expiresIn: 60000,
     });
-    return res.status(201).json({ message: 'Login successfully', data: token });
+    return res.status(200).json({ message: 'Login successfully', data: token });
   } catch (err) {
     return res
       .status(400)

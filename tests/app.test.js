@@ -1,6 +1,6 @@
 const request = require('supertest');
-const { connect, disconnected, cleanup } = require('./database');
-const app = require('./app');
+const { connect, disconnected, cleanup } = require('../src/database');
+const app = require('../src/app');
 
 describe('App', () => {
   beforeAll(async () => {

@@ -4,8 +4,7 @@ const optionsConnection = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 };
-const mongoUri =
-  'mongodb+srv://jtnovellis:TWRPQ6qx8YB4buc7@cluster0.zoo63qq.mongodb.net/favs?retryWrites=true&w=majority';
+
 let connection;
 async function connect() {
   if (connection) return;
@@ -19,7 +18,10 @@ async function connect() {
   connection.on('error', (error) => {
     console.log('Something went wrong!', error);
   });
-  await mongoose.connect(mongoUri, optionsConnection);
+  await mongoose.connect(
+    'mongodb+srv://jtnovellis:TWRPQ6qx8YB4buc7@cluster0.zoo63qq.mongodb.net/favs?retryWrites=true&w=majority',
+    optionsConnection
+  );
 }
 
 async function disconnected() {
