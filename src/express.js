@@ -5,7 +5,7 @@ const cors = require('cors');
 const expressConfig = (app) => {
   app.use(express.json());
   app.use(cors());
-  app.use(morgan('dev'));
+  app.use(morgan.token());
 };
 
 module.exports = { expressConfig };

@@ -4,7 +4,7 @@
   "description": "This is the assesment Backend from Make It Real",
   "main": "src/index.js",
   "scripts": {
-    "test": "NODE_ENV=test jest --verbose",
+    "test": "NODE_ENV=test jest --verbose --runInBand",
     "test:coverage": "test -- --coverage",
     "dev": "NODE_ENV=development nodemon src/index.js",
     "start": "NODE_ENV=production src/index.js"

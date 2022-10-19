@@ -1,5 +1,8 @@
 const mongoose = require('mongoose');
 
+const mongoUri =
+  process.env.MONGODB_URI ||
+  'mongodb+srv://jtnovellis:TWRPQ6qx8YB4buc7@cluster0.zoo63qq.mongodb.net/favs-tests?retryWrites=true&w=majority';
 const optionsConnection = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -18,10 +21,7 @@ async function connect() {
   connection.on('error', (error) => {
     console.log('Something went wrong!', error);
   });
-  await mongoose.connect(
-    'mongodb+srv://jtnovellis:TWRPQ6qx8YB4buc7@cluster0.zoo63qq.mongodb.net/favs?retryWrites=true&w=majority',
-    optionsConnection
-  );
+  await mongoose.connect(mongoUri, optionsConnection);
 }
 
 async function disconnected() {

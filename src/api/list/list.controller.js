@@ -10,15 +10,15 @@ const User = require('../user/user.model');
 const create = async (req, res) => {
   const data = req.body;
   const id = req.user;
+
   try {
     const user = await User.findById(id);
-    if (!user) {
-      throw new Error('The user does not exist');
-    }
-    console.log(user);
+    console.log('USER:', user);
     const list = await createList(data, id);
+    console.log('LIST:', list);
     user.lists.push(list);
     await user.save({ validateBeforeSave: false });
+    console.log('User After:', user);
     return res.status(201).json({ message: 'List created', data: list });
   } catch (err) {
     return res

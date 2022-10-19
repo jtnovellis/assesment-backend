@@ -12,7 +12,7 @@ const authenticate = async (req, res, next) => {
     if (!token) {
       throw new Error('The sesion has expired by token');
     }
-    const { id } = jwt.verify(token, 'AjddDDF34757edfg');
+    const { id } = jwt.verify(token, process.env.SECRET_KEY);
     req.user = id;
     const user = await User.findById(req.user);
     if (!user) {
