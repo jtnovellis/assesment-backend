@@ -13,12 +13,9 @@ const create = async (req, res) => {
 
   try {
     const user = await User.findById(id);
-    console.log('USER:', user);
     const list = await createList(data, id);
-    console.log('LIST:', list);
     user.lists.push(list);
     await user.save({ validateBeforeSave: false });
-    console.log('User After:', user);
     return res.status(201).json({ message: 'List created', data: list });
   } catch (err) {
     return res
